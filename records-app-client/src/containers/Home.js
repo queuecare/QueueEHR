@@ -36,7 +36,7 @@ export default class Home extends Component {
 						key={record.recordId}
 						href={`/records/${record.recordId}`}
 						onClick={this.handleRecordClick}
-						header={record.content.trim().split("\n")[0]}
+						header={`visit to ${record.title}`}
 					>
 					{"Created: " + new Date(record.createdAt).toLocaleString()}
 					</ListGroupItem>
