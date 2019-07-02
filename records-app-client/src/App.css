@@ -4,3 +4,9 @@
 .App .navbar-brand {
  font-weight: bold;
 }
+
+.App .Logo {
+  position: relative;
+  top: -15px;
+  height: 55px;
+}

@@ -9,7 +9,7 @@ import { Auth } from "aws-amplify";
 import LoaderButton from "../components/LoaderButton";
 import "./Signup.css";
 
-export default class Signup extends Component {
+export class Signup extends Component {
   constructor(props) {
     super(props);
 
@@ -69,7 +69,6 @@ export default class Signup extends Component {
     try {
       await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
       await Auth.signIn(this.state.email, this.state.password);
-
       this.props.userHasAuthenticated(true);
       this.props.history.push("/");
     } catch (e) {
@@ -155,3 +154,6 @@ export default class Signup extends Component {
     );
   }
 }
+
+
+export default Signup;

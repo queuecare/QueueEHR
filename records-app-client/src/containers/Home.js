@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { API } from "aws-amplify";
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import SignupPage from './Signup.js'
 import "./Home.css";
 
 export default class Home extends Component {
@@ -60,8 +61,21 @@ export default class Home extends Component {
 	renderLander() {
 		return(
 			<div className="lander">
-				<h1> Queue Records </h1>
-				<p>A simple Record taking app by Queue</p>
+
+				<div className="col-sm-6">
+					<h2>Say Goodbye</h2>
+					<h3>to loosing records</h3>
+					<h3>It's all here!</h3>
+				</div>
+				<div className='col-sm-6'>
+					<div className='SignupPage'>
+						<h1>Sign Up</h1>
+						<p>It's Free and Secure</p>
+						<SignupPage
+							userHasAuthenticated={this.props.userHasAuthenticated}
+							history={this.props.history}/>
+					</div>
+				</div>
 			</div>
 		);
 	}
