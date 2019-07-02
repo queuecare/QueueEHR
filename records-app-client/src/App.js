@@ -5,7 +5,7 @@ import Routes from "./Routes";
 import { LinkContainer } from "react-router-bootstrap"
 import { Auth } from "aws-amplify";
 import "./App.css";
-import logo from "./components/favicon.png";
+import logo from "./components/Logo.png";
 class App extends Component {
 	constructor(props) {
 	super(props);
@@ -46,7 +46,7 @@ class App extends Component {
 				<Navbar fluid collapseOnSelect>
 					<Navbar.Header>
 						<Navbar.Brand>
-							<Link to="/"><span><img src={logo} alt={"Q"}/>ueue Care</span></Link>
+							<Link to="/"><img src={logo} alt={"Queue Logo"} className="Logo"/></Link>
 						</Navbar.Brand>
 						<Navbar.Toggle />
 					</Navbar.Header>
@@ -55,9 +55,6 @@ class App extends Component {
 							{this.state.isAuthenticated
 							? <NavItem onClick={this.handleLogout}>Logout</NavItem>
 							: <Fragment>
-								<LinkContainer to="/signup">
-								  <NavItem>Signup</NavItem>
-								</LinkContainer>
 								<LinkContainer to="/login">
 								  <NavItem>Login</NavItem>
 								</LinkContainer>
