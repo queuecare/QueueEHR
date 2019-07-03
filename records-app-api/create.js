@@ -18,6 +18,7 @@ export async function main(event, context, callback) {
 		Item: {
 			 userId: event.requestContext.identity.cognitoIdentityId,
 			 recordId: uuid.v1(),
+			 ftype: data.ftype,
 			 title: data.title,
 			 content: data.content,
 			 attachment: data.attachment,
