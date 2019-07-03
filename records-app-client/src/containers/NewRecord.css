@@ -5,3 +5,8 @@
  height: 300px;
  font-size: 24px;
 }
+
+.NewRecord form .title {
+ height: 50px;
+ font-size: 24px;
+}

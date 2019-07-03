@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { API, Storage } from "aws-amplify";
-import { s3Upload } from "../libs/awsLib";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+import {Button} from "react-bootstrap"
 import config from "../config";
 import "./Records.css";
 export default class Records extends Component {
@@ -10,9 +9,9 @@ export default class Records extends Component {
 		super(props);
 		this.file = null;
 		this.state = {
-			isLoading: null,
-			isDeleting: null,
 			record: null,
+			recordId: "",
+			title: "",
 			content: "",
 			attachmentURL: null
 		};
@@ -24,13 +23,15 @@ export default class Records extends Component {
 		try {
 			let attachmentURL;
 			const record = await this.getRecord();
-			const { content, attachment } = record;
+			const {recordId, title, content, attachment } = record;
 			if (attachment) {
 				attachmentURL = await Storage.vault.get(attachment);
 			}
 
 			this.setState({
 				record,
+				recordId,
+				title,
 				content,
 				attachmentURL
 			});
@@ -43,61 +44,13 @@ export default class Records extends Component {
 		return API.get("records", `/healthrecords/${this.props.match.params.id}`);
 	}
 
-	validateForm() {
-	  return this.state.content.length > 0;
-	}
-
-	formatFilename(str) {
-	  return str.replace(/^\w+-/, "");
-	}
-
-	handleChange = event => {
-	  this.setState({
-		[event.target.id]: event.target.value
-	  });
-	}
-
-	handleFileChange = event => {
-	  this.file = event.target.files[0];
-	}
-
-	saveRecord(record) {
-	  return API.put("records", `/healthrecords/${this.props.match.params.id}`, {
-		body: record
-	  });
-	}
-
-	handleSubmit = async event => {
-	  let attachment;
-
-	  event.preventDefault();
-
-	  if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-		alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
-		return;
-	  }
-
-	  this.setState({ isLoading: true });
-
-	  try {
-		if (this.file) {
-		  attachment = await s3Upload(this.file);
-		}
-
-		await this.saveRecord({
-		  content: this.state.content,
-		  attachment: attachment || this.state.record.attachment
-		});
-		this.props.history.push("/");
-	  } catch (e) {
-		alert(e);
-		this.setState({ isLoading: false });
-	  }
-	}
-
-
 	deleteRecord() {
 	  return API.del("records", `/healthrecords/${this.props.match.params.id}`);
+	}
+
+	handleRecordClick = event => {
+		event.preventDefault();
+		this.props.history.push(event.currentTarget.getAttribute("href"));
 	}
 
 	handleDelete = async event => {
@@ -125,53 +78,40 @@ export default class Records extends Component {
 	render() {
 	  return (
 		<div className="Records">
-		  {this.state.record &&
-			<form onSubmit={this.handleSubmit}>
-			  <FormGroup controlId="content">
-				<FormControl
-				  onChange={this.handleChange}
-				  value={this.state.content}
-				  componentClass="textarea"
-				/>
-			  </FormGroup>
-			  {this.state.record.attachment &&
-				<FormGroup>
-				  <ControlLabel>Attachment</ControlLabel>
-				  <FormControl.Static>
-					<a
-					  target="_blank"
-					  rel="noopener noreferrer"
-					  href={this.state.attachmentURL}
-					>
-					  {this.formatFilename(this.state.record.attachment)}
-					</a>
-				  </FormControl.Static>
-				</FormGroup>}
-			  <FormGroup controlId="file">
-				{!this.state.record.attachment &&
-				  <ControlLabel>Attachment</ControlLabel>}
-				<FormControl onChange={this.handleFileChange} type="file" />
-			  </FormGroup>
-			  <LoaderButton
-				block
-				bsStyle="primary"
-				bsSize="large"
-				disabled={!this.validateForm()}
-				type="submit"
-				isLoading={this.state.isLoading}
-				text="Save"
-				loadingText="Saving…"
-			  />
-			  <LoaderButton
-				block
-				bsStyle="danger"
-				bsSize="large"
-				isLoading={this.state.isDeleting}
-				onClick={this.handleDelete}
-				text="Delete"
-				loadingText="Deleting…"
-			  />
-			</form>}
+			<div className="visit-detail">
+				<div className="row">
+					<div className="col-sm-6">
+					<h2>{`Visit to ${this.state.title}`}</h2>
+					</div>
+					<div className="button col-sm-6">
+					<Button
+						href={`/records/edit/${this.state.recordId}`}
+						onClick={this.handleRecordClick}
+						bsStyle="primary"
+						bsSize="large"
+						>
+						Edit
+					</Button>
+					<LoaderButton
+						bsStyle="danger"
+						bsSize="large"
+						isLoading={this.state.isDeleting}
+						onClick={this.handleDelete}
+						text="Delete"
+						loadingText="Deleting…"
+					/>
+					</div>
+				</div>
+				<hr/>
+				<img src={this.state.attachmentURL}/>
+				<hr/>
+				<h3>Detail</h3>
+				<div dangerouslySetInnerHTML={{__html: this.state.content.replace(/\n/g, "<br />")}}></div>
+			</div>
+
+
+
+
 		</div>
 	  );
 	}

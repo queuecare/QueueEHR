@@ -11,6 +11,7 @@ export default class NewRecord extends Component {
 		this.file = null;
 		this.state = {
 		isLoading: null,
+		ftype: "clinic",
 		title: "",
 		content: ""
 		};
@@ -61,13 +62,15 @@ export default class NewRecord extends Component {
 					<FormControl
 					onChange={this.handleChange}
 					value={this.state.title}
-					componentClass="textarea"
+					placeholder="Facility Name"
+					className="title"
 					/>
 				</FormGroup>
 				<FormGroup controlId="content">
 					<FormControl
 					onChange={this.handleChange}
 					value={this.state.content}
+					placeholder="Visit Detail"
 					componentClass="textarea"
 					/>
 				</FormGroup>
