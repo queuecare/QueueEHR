@@ -1,14 +1,14 @@
 {
-  "name": "notes-app-client",
+  "name": "records-app-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.0.2",
     "@material-ui/icons": "^4.2.1",
     "aws-amplify": "^1.1.29",
-    "react": "^16.5.2",
+    "react": "^16.6.0",
     "react-bootstrap": "^0.32.4",
-    "react-dom": "^16.5.2",
+    "react-dom": "^16.6.0",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.0.1"
