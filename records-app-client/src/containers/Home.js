@@ -28,6 +28,18 @@ export default class Home extends Component {
 		records() {
 		return API.get("records", "/healthrecords");
 	}
+	renderImmunization(records) {
+		// TODO X: Immunization records!
+		return <ListGroupItem
+			key="Immunization"
+			href="/immunization"
+			onClick={this.handleRecordClick}
+		>
+			<h4>
+				Immunization record
+			</h4>
+		</ListGroupItem>
+	}
 
 	renderRecordsList(records) {
 		return [{}].concat(records).map(
@@ -41,7 +53,8 @@ export default class Home extends Component {
 					>
 					{"Created: " + new Date(record.createdAt).toLocaleString()}
 					</ListGroupItem>
-					: <ListGroupItem
+					: 
+					<ListGroupItem
 						key="new"
 						href="/records/new"
 						onClick={this.handleRecordClick}
@@ -84,6 +97,9 @@ export default class Home extends Component {
 		return (
 			<div className="records">
 				<PageHeader> Your Records </PageHeader>
+				<ListGroup>
+					{!this.state.isLoading && this.renderImmunization(this.state.records)}
+				</ListGroup>
 				<ListGroup>
 					{!this.state.isLoading && this.renderRecordsList(this.state.records)}
 				</ListGroup>
