@@ -1,71 +1,90 @@
 import React, { Component } from "react";
-import { API, Storage } from "aws-amplify";
+import { API } from "aws-amplify";
 import LoaderButton from "../components/LoaderButton";
-import {Button} from "react-bootstrap"
-import config from "../config";
+import { Button, PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 import "./Immunization.css";
-export default class Immunization extends Component {
+export default class Records extends Component {
 	constructor(props) {
 		super(props);
 		this.file = null;
 		this.state = {
-			content: "",
+			isLoading: true,
+			records: []
 		};
+
 	}
 
 	async componentDidMount() {
+		if (!this.props.isAuthenticated) {
+			return;
+		}
 		try {
-			// TODO X: Get Imm instead
-			const record = await this.getRecord();
-			const {content} = record;
+			const records = await this.records();
+			this.setState({ records });
 
-			this.setState({
-				record,
-				content,
-			});
 		} catch (e) {
 			alert(e);
 		}
+		this.setState({ isLoading: false });
+		}
+		records() {
+		return API.get("records", "/healthrecords");
 	}
 
-	getRecord() {
-		// TODO X: Make own get for Immunization
-		console.log('this.props.match.params.id: ', this.props.match.params.id)
-		return API.get("records", `/healthrecords/${this.props.match.params.id}`);
-	}
+
 
 	handleRecordClick = event => {
 		event.preventDefault();
 		this.props.history.push(event.currentTarget.getAttribute("href"));
 	}
 
-	render() {
-	  return (
-		<div className="Records">
-			<div className="visit-detail">
-				<div className="row">
-					<div className="col-sm-6">
-					<h2>Your immunization records</h2>
-					</div>
-					<div className="button col-sm-6">
-					<Button
-						// TODO X: Hard code Immunization href
-						href={`/Immunization/edit`}
-						onClick={this.handleRecordClick}
-						bsStyle="primary"
-						bsSize="large"
-						>
-						Edit
-					</Button>
-					</div>
-				</div>
-				<div dangerouslySetInnerHTML={{__html: this.state.content.replace(/\n/g, "<br />")}}></div>
+
+	renderImmunization() {
+		return (
+			<div className="records">
+				<PageHeader> Your Immunization Record: </PageHeader>
+				<ListGroup>
+					{!this.state.isLoading && this.renderImmunizationList(this.state.records) }
+				</ListGroup>
 			</div>
+		);
+	}
 
+	renderImmunizationList(records) {
+		return [{}].concat(records).map(
+			(record, i) =>
+				i !== 0 && record.ftype ==='immune'
+					?
+						<ListGroupItem
+							key={record.recordId}
+							href={`/records/${record.recordId}`}
+							onClick={this.handleRecordClick}
+							header={`visit to ${record.title}`}
+						>
+						{"Created: " + new Date(record.createdAt).toLocaleString()}
+						</ListGroupItem>
 
+					: i===0?
 
+						<ListGroupItem
+							key="new"
+							href="/immunization/new"
+							onClick={this.handleRecordClick}
+						>
+							<h4>
+								<b>{"\uFF0B"}</b> Create a new record
+							</h4>
+						</ListGroupItem>
 
-		</div>
-	  );
+					: null
+		);
+	}
+
+	render() {
+		return(
+			<div className="Home">
+			{this.renderImmunization()}
+			</div>
+		);
 	}
 }

@@ -53,7 +53,7 @@ export default class Home extends Component {
 					>
 					{"Created: " + new Date(record.createdAt).toLocaleString()}
 					</ListGroupItem>
-					: 
+					:
 					<ListGroupItem
 						key="new"
 						href="/records/new"

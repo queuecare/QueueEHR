@@ -4,14 +4,14 @@ import { s3Upload } from "../libs/awsLib";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
-import "./NewRecord.css";
+import "./ImmunizationNew.css";
 export default class NewRecord extends Component {
 	constructor(props) {
 		super(props);
 		this.file = null;
 		this.state = {
 		isLoading: null,
-		ftype: "clinic",
+		ftype: "immune",
 		title: "",
 		content: ""
 		};
