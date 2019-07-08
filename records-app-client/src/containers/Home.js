@@ -44,7 +44,7 @@ export default class Home extends Component {
 	renderRecordsList(records) {
 		return [{}].concat(records).map(
 			(record, i) =>
-				i !== 0
+				i !== 0 && record.ftype==='clinic'
 					? <ListGroupItem
 						key={record.recordId}
 						href={`/records/${record.recordId}`}
@@ -53,7 +53,7 @@ export default class Home extends Component {
 					>
 					{"Created: " + new Date(record.createdAt).toLocaleString()}
 					</ListGroupItem>
-					: 
+					: i===0 ?
 					<ListGroupItem
 						key="new"
 						href="/records/new"
@@ -63,6 +63,8 @@ export default class Home extends Component {
 							<b>{"\uFF0B"}</b> Create a new record
 						</h4>
 					</ListGroupItem>
+
+					: null
 		);
 	}
 
@@ -97,10 +99,10 @@ export default class Home extends Component {
 		return (
 			<div className="records">
 				<PageHeader> Your Records </PageHeader>
-				<ListGroup>
+				<ListGroup className="section">
 					{!this.state.isLoading && this.renderImmunization(this.state.records)}
 				</ListGroup>
-				<ListGroup>
+				<ListGroup className="section">
 					{!this.state.isLoading && this.renderRecordsList(this.state.records)}
 				</ListGroup>
 			</div>

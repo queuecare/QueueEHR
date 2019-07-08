@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { API, Storage } from "aws-amplify";
 import LoaderButton from "../components/LoaderButton";
 import {Button} from "react-bootstrap"
-import config from "../config";
 import "./Records.css";
+
 export default class Records extends Component {
 	constructor(props) {
 		super(props);
@@ -33,7 +33,8 @@ export default class Records extends Component {
 				recordId,
 				title,
 				content,
-				attachmentURL
+				attachmentURL,
+				isLoading: false
 			});
 		} catch (e) {
 			alert(e);
@@ -103,7 +104,7 @@ export default class Records extends Component {
 					</div>
 				</div>
 				<hr/>
-				<img src={this.state.attachmentURL}/>
+				<img src={this.state.attachmentURL} alt="attachment"/>
 				<hr/>
 				<h3>Detail</h3>
 				<div dangerouslySetInnerHTML={{__html: this.state.content.replace(/\n/g, "<br />")}}></div>
