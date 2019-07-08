@@ -1,5 +1,6 @@
 .App {
  margin-top: 15px;
+margin-bottom: 15px;
 }
 .App .navbar-brand {
  font-weight: bold;
@@ -9,4 +10,36 @@
   position: relative;
   top: -15px;
   height: 55px;
+}
+
+.App .top{
+  visibility: visible;
+  position: fixed;
+  left:0;
+  top:0;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.App .bottom{
+  visibility: hidden;
+  position: fixed;
+  left:0;
+  bottom:0;
+  width: 100%;
+  margin:0;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .App .top{
+    visibility: hidden;
+  }
+  .App .bottom{
+    visibility: visible;
+  }
+}
+
+
+.App .spacer{
+  height:80px;
 }

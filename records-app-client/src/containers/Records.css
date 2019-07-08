@@ -20,3 +20,19 @@
 .Records .button {
   text-align: right;
 }
+
+.Records .actionbutton{
+  position: fixed;
+  top: 3%;
+  right: 10%;
+  z-index: 1;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .Records .actionbutton{
+    top: auto;
+    bottom: 3%;
+    left: 40%;
+  }
+}

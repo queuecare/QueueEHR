@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import { API, Storage } from "aws-amplify";
 import { s3Upload } from "../libs/awsLib";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
+
+
 import "./RecordEdit.css";
+
 export default class Records extends Component {
 	constructor(props) {
 		super(props);
@@ -169,6 +173,7 @@ export default class Records extends Component {
 				text="Save"
 				loadingText="Saving…"
 			  />
+
 			  <LoaderButton
 				block
 				bsStyle="danger"
