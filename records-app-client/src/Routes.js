@@ -10,8 +10,6 @@ import RecordEdit from "./containers/RecordEdit";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 import Immunization from "./containers/Immunization";
-import ImmunizationEdit from "./containers/ImmunizationEdit";
-import NewImmunization from "./containers/ImmunizationNew";
 
 export default ({ childProps }) =>
   <Switch>
@@ -21,8 +19,6 @@ export default ({ childProps }) =>
     <AuthenticatedRoute path="/records/:id" exact component={Records} props={childProps} />
     <AuthenticatedRoute path="/records/edit/:id" exact component={RecordEdit} props={childProps} />
     <AuthenticatedRoute path="/immunization" exact component={Immunization} props={childProps} />
-    <AuthenticatedRoute path="/immunization/edit" exact component={ImmunizationEdit} props={childProps} />
-    <AuthenticatedRoute path="/immunization/new" exact component={NewImmunization} props={childProps} />
     { /* Finally, catch all unmatched routes */ }
     <Route component={NotFound} />
   </Switch>;

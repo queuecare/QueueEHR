@@ -1,11 +1,16 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
-import Routes from "./Routes";
 import { LinkContainer } from "react-router-bootstrap"
 import { Auth } from "aws-amplify";
+import Routes from "./Routes";
+
 import "./App.css";
 import logo from "./components/Logo.png";
+
+
+
+
 class App extends Component {
 	constructor(props) {
 	super(props);
