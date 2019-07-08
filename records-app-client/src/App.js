@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap"
+
+import { Icon } from "@material-ui/core"
 import { Auth } from "aws-amplify";
 import Routes from "./Routes";
 
@@ -48,7 +50,7 @@ class App extends Component {
 		return (
 			!this.state.isAuthenticating &&
 			<div className="App container">
-				<Navbar fluid collapseOnSelect>
+				<Navbar className="top" fluid collapseOnSelect>
 					<Navbar.Header>
 						<Navbar.Brand>
 							<Link to="/"><img src={logo} alt={"Queue Logo"} className="Logo"/></Link>
@@ -68,7 +70,36 @@ class App extends Component {
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>
+				<div className="spacer"> </div>
 				<Routes childProps={childProps} />
+
+				<Navbar className="bottom" fluid collapseOnSelect>
+				{this.props.match.isExact
+					?
+						<Navbar.Header>
+							<Navbar.Toggle />
+						</Navbar.Header>
+					:
+						<Navbar.Header>
+							<Navbar.Brand>
+								<Link to="/"><Icon>keyboard_arrow_left</Icon>Home</Link>
+							</Navbar.Brand>
+							<Navbar.Toggle />
+						</Navbar.Header>
+				}
+				<Navbar.Collapse>
+					<Nav pullRight>
+						{this.state.isAuthenticated
+						? <NavItem onClick={this.handleLogout}>Logout</NavItem>
+						: <Fragment>
+							<LinkContainer to="/login">
+								<NavItem>Login</NavItem>
+							</LinkContainer>
+							</Fragment>
+						}
+					</Nav>
+				</Navbar.Collapse>
+				</Navbar>
 			</div>
 		);
 	}
