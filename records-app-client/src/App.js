@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap"
 
 import { Icon } from "@material-ui/core"
 import { Auth } from "aws-amplify";
@@ -22,6 +21,7 @@ class App extends Component {
 		};
 	}
 	async componentDidMount() {
+		window.addEventListener('scroll', this.handleScroll);
 		try {
 			if (await Auth.currentSession()) {
 			this.userHasAuthenticated(true);
@@ -37,11 +37,13 @@ class App extends Component {
 	userHasAuthenticated = authenticated => {
 		this.setState({ isAuthenticated: authenticated });
 	}
+
 	handleLogout = async event => {
 		await Auth.signOut();
 		this.userHasAuthenticated(false);
 		this.props.history.push("/login");
 	}
+
 	render() {
 		const childProps = {
 		  isAuthenticated: this.state.isAuthenticated,
@@ -62,9 +64,7 @@ class App extends Component {
 							{this.state.isAuthenticated
 							? <NavItem onClick={this.handleLogout}>Logout</NavItem>
 							: <Fragment>
-								<LinkContainer to="/login">
-								  <NavItem>Login</NavItem>
-								</LinkContainer>
+			            <NavItem href="/login">Login</NavItem>
 							  </Fragment>
 							}
 						</Nav>
@@ -92,9 +92,8 @@ class App extends Component {
 						{this.state.isAuthenticated
 						? <NavItem onClick={this.handleLogout}>Logout</NavItem>
 						: <Fragment>
-							<LinkContainer to="/login">
-								<NavItem>Login</NavItem>
-							</LinkContainer>
+								<NavItem href="/signup">Signup</NavItem>
+								<NavItem href="/login">Login</NavItem>
 							</Fragment>
 						}
 					</Nav>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { API } from "aws-amplify";
 import { PageHeader} from "react-bootstrap";
+import { CircularProgress } from "@material-ui/core";
 import EditTable from "../components/Table";
 import "./Immunization.css";
 
@@ -68,7 +69,7 @@ export default class Records extends Component {
 			render() {
 				return(
 					<div className="Home">
-					{this.state.isLoading ? 'Loading...' : this.renderImmunization()}
+					{this.state.isLoading ? <center><CircularProgress/></center> : this.renderImmunization()}
 
 					</div>
 				);
