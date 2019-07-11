@@ -53,20 +53,16 @@ export default class Records extends Component {
 	render() {
 	  return (
 		<div className="Records">
-			<div className="visit-detail">
-				<div className="row">
-					<div className="col-sm-6">
+			<div className="visit-detail pop">
+				<div className="visit-title">
 					<h2>{`Visit to ${this.state.title}`}</h2>
-					</div>
-					<div className="button col-sm-6">
-
-					</div>
 				</div>
 				<hr/>
-				<img src={this.state.attachmentURL} alt="attachment"/>
-				<hr/>
-				<h3>Detail</h3>
+
+				<h3>Detail:</h3>
 				<div dangerouslySetInnerHTML={{__html: this.state.content.replace(/\n/g, "<br />")}}></div>
+				<hr/>
+				{this.state.attachmentURL!==undefined?<img src={this.state.attachmentURL} alt="attachment"/>: null}
 
 				<a
 					href={`/records/edit/${this.state.recordId}`}
@@ -76,8 +72,7 @@ export default class Records extends Component {
 						className="actionbutton"
 						color="primary"
 						aria-label="Edit"
-
-						>
+					>
 						<Icon>edit_icon</Icon>
 					</Fab>
 				</a>

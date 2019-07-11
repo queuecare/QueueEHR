@@ -1,23 +1,7 @@
-.Records .visit-detail {
-  /* TODO X: Double check css */
-  padding: 0px 20px 50px 20px;
-  margin: 20px 0 50px 0;
-  background: #fefefe;
-  box-shadow:
-    /* The top layer shadow */
-    0 1px 5px rgba(0,0,0,0.2),
-    /* The second layer */
-    0 10px 0 -5px #eee,
-    /* The second layer shadow */
-    0 10px 1px -4px rgba(0,0,0,0.15),
-     /* The third layer */
-    0 20px 0 -10px #eee,
-    /* The third layer shadow */
-    0 20px 1px -9px rgba(0,0,0,0.15);
-    /* Padding for demo purposes */
-    padding: 30px;
+.Immunization .button {
+  text-align: right;
 }
 
-.Records .button {
-  text-align: right;
+.Immunization h6{
+  font-size: 20px;
 }

@@ -17,6 +17,10 @@ export default class Home extends Component {
 			records: []
 		};
 	}
+
+	async componentWillMount(){
+			window.removeEventListener('scroll', this.resizeHeaderOnScroll);
+	}
 	async componentDidMount() {
 		window.addEventListener('scroll', this.resizeHeaderOnScroll);
 		if (!this.props.isAuthenticated) {
@@ -81,7 +85,7 @@ export default class Home extends Component {
 						key={record.recordId}
 						href={`/records/${record.recordId}`}
 						onClick={this.handleRecordClick}
-						header={`visit to ${record.title}`}
+						header={`Visit to ${record.title}`}
 					>
 					{"Created: " + new Date(record.createdAt).toLocaleString()}
 					</ListGroupItem>
@@ -147,16 +151,17 @@ export default class Home extends Component {
 	renderRecords() {
 		return (
 			<div className="records">
+				<center><img src={logo} className="mobile" alt="logo" height="200px"/></center>
 				<PageHeader> Your Records </PageHeader>
 				{this.state.isLoading ?
 					<center><CircularProgress/></center>
 					:
 						<React.Fragment>
-							<h2> Immunization Records </h2>
+							<h3> Immunization Records </h3>
 								<ListGroup className="section">
 									{this.renderImmunization(this.state.records)}
 								</ListGroup>
-							<h2> Visit Records </h2>
+							<h3> Visit Records </h3>
 								<ListGroup className="section">
 									{this.renderRecordsList(this.state.records)}
 								</ListGroup>

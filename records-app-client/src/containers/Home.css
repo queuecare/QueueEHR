@@ -2,12 +2,17 @@
  padding:10px 0;
  text-align: center;
 }
+
 .Home .lander h1 {
  font-family: "Open Sans", sans-serif;
  font-weight: 600;
 }
 .Home .lander p {
  color: #999;
+}
+
+.Home .records {
+  margin-bottom: 50px;
 }
 .Home .records h4 {
  font-family: "Open Sans", sans-serif;
@@ -33,11 +38,6 @@ box-shadow: 0 0.3px 0.9px rgba(0,0,0,.12), 0 1.6px 3.6px rgba(0,0,0,.12);
   box-shadow:0 1px 6px 0 rgba(32,33,36,0.28);
 }
 
-@media only screen and (max-width: 768px) {
-  .Home .SignupPage{
-    display: none;
-  }
-}
 .Home .SignupPage form {
 margin: 0 auto;
 max-width: 320px;
@@ -50,19 +50,23 @@ padding-bottom: 10px;
 color: #999;
 }
 
+.Home .mobile{
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .Home .SignupPage{
+    display: none;
+  }
+  .Home .mobile{
+    display:block;
+  }
+}
+
+
 .Home .section{
   border-radius: 15px;
   box-shadow: 0 0.3px 0.9px rgba(0,0,0,.12), 0 1.6px 3.6px rgba(0,0,0,.12);
-}
-
-.Home .section-button{
-  height:60px;
-
-}
-
-.Home .section-button p{
-  font-family: "Open Sans", sans-serif;
-  font-weight: 600;
 }
 
 .Home .section:hover{

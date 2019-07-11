@@ -7,3 +7,6 @@ export async function s3Upload(file) {
  /* Storage.vault.put -> secret storage ; Storage.put -> public storage  */
  return stored.key;
 }
+export async function s3Delete(file){
+  await Storage.vault.delete(file)
+}

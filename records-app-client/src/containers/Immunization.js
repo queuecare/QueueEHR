@@ -45,7 +45,7 @@ export default class Records extends Component {
 				return (
 					<div className="records">
 						<PageHeader> Your Immunization Record: </PageHeader>
-						<EditTable title="Immunization Record"
+						<EditTable className="Table" title="Immunization Record"
 							data={this.renderImmunizationTable(this.state.records).filter(
 									function (el) {
   										return el != null;
