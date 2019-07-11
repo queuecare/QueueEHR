@@ -1,5 +1,10 @@
 .App {
- margin-top: 15px;
+margin-top: 15px;
+margin-bottom: 15px;
+}
+
+body{
+  background-color: #f5f5f5;
 }
 .App .navbar-brand {
  font-weight: bold;
@@ -9,4 +14,40 @@
   position: relative;
   top: -15px;
   height: 55px;
+}
+
+.App .top{
+  visibility: visible;
+  position: fixed;
+  left:0;
+  top:0;
+  width: 100%;
+  margin-bottom: 10px;
+  z-index: 10;
+  background-color: white;
+}
+.App .bottom{
+  visibility: hidden;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  z-index: 10;
+  background-color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .App .top{
+    visibility: hidden;
+  }
+  .App .bottom{
+    visibility: visible;
+  }
+}
+
+
+.App .spacer{
+  height:80px;
 }

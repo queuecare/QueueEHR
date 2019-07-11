@@ -2,6 +2,7 @@
  padding:10px 0;
  text-align: center;
 }
+
 .Home .lander h1 {
  font-family: "Open Sans", sans-serif;
  font-weight: 600;
@@ -9,7 +10,11 @@
 .Home .lander p {
  color: #999;
 }
-.Home .notes h4 {
+
+.Home .records {
+  margin-bottom: 50px;
+}
+.Home .records h4 {
  font-family: "Open Sans", sans-serif;
  font-weight: 600;
  overflow: hidden;
@@ -17,23 +22,65 @@
  white-space: nowrap;
  text-overflow: ellipsis;
 }
-.Home .notes p {
+.Home .records p {
  color: #666;
 }
 
 .Home .SignupPage {
-margin-left: 20px;
-margin-right: 20px;
+padding-left: 20px;
+padding-right: 20px;
 padding: 10px 0 50px;
-box-shadow: 0 5px 10px 2px rgba(0,0,0,.4);
+background: white;
+box-shadow: 0 0.3px 0.9px rgba(0,0,0,.12), 0 1.6px 3.6px rgba(0,0,0,.12);
 }
+
+.Home .SignupPage:hover{
+  box-shadow:0 1px 6px 0 rgba(32,33,36,0.28);
+}
+
 .Home .SignupPage form {
 margin: 0 auto;
 max-width: 320px;
+
 }
 
 .Home .SignupPage form span.help-block {
 font-size: 14px;
 padding-bottom: 10px;
 color: #999;
+}
+
+.Home .mobile{
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .Home .SignupPage{
+    display: none;
+  }
+  .Home .mobile{
+    display:block;
+  }
+}
+
+
+.Home .section{
+  border-radius: 15px;
+  box-shadow: 0 0.3px 0.9px rgba(0,0,0,.12), 0 1.6px 3.6px rgba(0,0,0,.12);
+}
+
+.Home .section:hover{
+  box-shadow:0 1px 6px 0 rgba(32,33,36,0.28);
+}
+
+.Home .ground{
+  min-height: 70vh;
+
+}
+.Home .test-image{
+ margin-left: calc(50% - 50vw);
+ margin-right: calc(50% - 50vw);
+ padding-left:0px;
+ padding-right:0px;
+
 }
